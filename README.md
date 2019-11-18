@@ -1,12 +1,9 @@
 # OAuth2 란
 
-[##_Image|https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FdkgC4H%2FbtqzPmIuRgy%2F6hJmBE8hlsTjW2du6q3R01%2Fimg.png|floatLeft|data-filename="oauth2.png"|_##]
-
 OAuth는 Open Authorization, Open Authentication 뜻하는 것으로 자신의 애플리케이션 서버의 데이터로 다른 Third party에게 자원을 공유하거나 대신 유저 인증을 처리해줄 수 있는 오픈 표준 프로토콜이다.
 
 대표적인 예가 구글인증이나 페이스북인증입니다. 회원가입이나 로그인시에 구글 또는 페이스북으로 연결을 지원하는 방식입니다. 요즘에는 네이버로그인과 카카오로그인도 있습니다.
 
-[##_Image|https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FulyaF%2FbtqzNC0hjQh%2FaKpGrWFzPlfPgcp9TYWhq1%2Fimg.png|alignCenter|data-filename="oauth2-ex01.png"|OAuth2 로그인 예_##]
 
 # OAuth2 승인방식
 
