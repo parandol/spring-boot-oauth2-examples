@@ -22,5 +22,5 @@ OAuth는 Open Authorization, Open Authentication 뜻하는 것으로 자신의 �
 
 
 # Spring Boot with OAuth2 Server
-- [Chapter 01 - Spring Boot OAuth2 Server, 4 Types](https://github.com/parandol/spring-boot-oauth2-examples/tree/master/spring-boot-oauth2-server-chap01)
+- [Chapter 01 - Spring Boot OAuth2 Server, 4 Types](https://github.com/parandol/spring-boot-oauth2-examples/tree/master/spring-boot-oauth2-chap01)
 
