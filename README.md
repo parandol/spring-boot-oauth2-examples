@@ -23,9 +23,5 @@ OAuth는 Open Authorization, Open Authentication 뜻하는 것으로 자신의 �
 
 # Spring Boot with OAuth2 Server
 -   [Spring Boot with OAuth2 - 1. OAuth2 Server 구현](https://parandol.tistory.com/4)  
-    [Chapter 01 - Spring Boot OAuth2 Server, 4 Types](https://github.com/parandol/spring-boot-oauth2-examples/tree/master/spring-boot-oauth2-chap01)
 -   [Spring Boot with OAuth2 - 2. OAuth2 Server 확장 1 - Hibernate + MariaDB 연결](https://parandol.tistory.com/5)  
-    [Chapter 02 - Spring Boot OAuth2 Server, Database(Hibernate, MariaDB)](https://github.com/parandol/spring-boot-oauth2-examples/tree/master/spring-boot-oauth2-chap02)
 -   [Spring Boot with OAuth2 - 3. OAuth2 Server 확장 2 - MyBatis + MariaDB 연결](https://parandol.tistory.com/6)  
-    [Chapter 03 - Spring Boot OAuth2 Server, Database(MyBatis, MariaDB)](https://github.com/parandol/spring-boot-oauth2-examples/tree/master/spring-boot-oauth2-chap03)
-
