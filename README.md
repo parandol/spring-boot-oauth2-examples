@@ -25,3 +25,4 @@ OAuth는 Open Authorization, Open Authentication 뜻하는 것으로 자신의 �
 -   [Spring Boot with OAuth2 - 1. OAuth2 Server 구현](https://parandol.tistory.com/4)  
 -   [Spring Boot with OAuth2 - 2. OAuth2 Server 확장 1 - Hibernate + MariaDB 연결](https://parandol.tistory.com/5)  
 -   [Spring Boot with OAuth2 - 3. OAuth2 Server 확장 2 - MyBatis + MariaDB 연결](https://parandol.tistory.com/6)  
+-   [Spring Boot with OAuth2 - 4. OAuth2 Server 확장 3 - JWT Token Service](https://parandol.tistory.com/8)  
