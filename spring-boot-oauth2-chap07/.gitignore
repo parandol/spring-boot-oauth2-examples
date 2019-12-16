@@ -1,0 +1,58 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+
+### Vue ###
+.mvn
+src/front/.DS_Store
+src/front/node_modules
+src/front/dist
+src/front/target
+
+
+# local env files
+src/front/.env.local
+src/front/.env.*.local
+
+# Log files
+src/front/npm-debug.log*
+src/front/yarn-debug.log*
+src/front/yarn-error.log*
+
+# Editor directories and files
+src/front/.idea
+src/front/.vscode
+src/front/*.suo
+src/front/*.ntvs*
+src/front/*.njsproj
+src/front/*.sln
+src/front/*.sw?

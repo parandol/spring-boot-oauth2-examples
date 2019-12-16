@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oauth">
+	<select id="findAuthenticationByCode" resultType="kr.ejsoft.oauth2.server.model.OAuthAuthenticationCode">
+		<![CDATA[
+		SELECT code, authentication
+		  FROM oauth_code
+		 WHERE code = #{code}
+		]]>
+	</select>
+	
+	<insert id="saveCode" keyProperty="token_id">
+		INSERT INTO oauth_code
+		    (code, authentication)
+		VALUES
+		    (#{code}, #{authentication})
+	</insert>
+	
+	<delete id="deleteCode">
+		DELETE FROM oauth_code
+		 WHERE code = #{code}
+	</delete>
+	
+	
+	
+	
+	<select id="findByUserIdAndClientId" resultType="kr.ejsoft.oauth2.server.model.OAuthApproval">
+		<![CDATA[
+		SELECT
+		    expiresAt, status, lastModifiedAt, userId, clientId, scope
+		FROM
+		    oauth_approvals
+		WHERE 1=1
+		  AND userId = #{userId}
+		  AND clientId = #{clientId}
+		]]>
+	</select>
+	
+	<insert id="saveApproval" keyProperty="token_id">
+		insert into oauth_approvals
+		    (expiresAt, status, lastModifiedAt, userId, clientId, scope)
+		values
+		    (#{expiresAt, javaType=java.sql.Timestamp, jdbcType=TIMESTAMP},
+		     #{status},
+		     #{lastModifiedAt, javaType=java.sql.Timestamp, jdbcType=TIMESTAMP},
+		     #{userId},
+		     #{clientId},
+		     #{scope})
+	</insert>
+	
+	<update id="refreshApproval">
+		UPDATE oauth_approvals
+		   SET expiresAt=#{expiresAt, javaType=java.sql.Timestamp, jdbcType=TIMESTAMP},
+		       status=#{status},
+		       lastModifiedAt=#{lastModifiedAt, javaType=java.sql.Timestamp, jdbcType=TIMESTAMP}
+		 WHERE 1=1
+		   AND userId = #{userId}
+		   AND clientId = #{clientId}
+		   AND scope = #{scope}
+	</update>
+
+	<update id="expireApproval">
+		UPDATE oauth_approvals
+		   SET expiresAt = #{expiresAt}
+		 WHERE 1=1
+		   AND userId = #{userId}
+		   AND clientId = #{clientId}
+		   AND scope = #{scope}
+	</update>
+	
+	<delete id="deleteApproval">
+		DELETE FROM oauth_approvals
+		WHERE 1=1
+		  AND userId = #{userId}
+		  AND clientId = #{clientId}
+		  AND scope = #{scope}
+	</delete>
+	
+	
+	
+	<select id="findRefreshTokenByTokenId" resultType="kr.ejsoft.oauth2.server.model.OAuthRefreshToken">
+		<![CDATA[
+		SELECT
+		    *
+		FROM
+		    oauth_refresh_token
+		WHERE
+		    token_id = #{tokenId}
+		]]>
+	</select>
+	
+	<insert id="saveRefreshToken" keyProperty="token_id">
+		insert into oauth_refresh_token
+		    (token_id, token, authentication, username, client_id)
+		values
+		    (#{tokenId}, #{token}, #{authentication}, #{username}, #{clientId})
+	</insert>
+
+
+	<delete id="deleteRefreshToken">
+		delete from oauth_refresh_token where token_id = #{tokenId}
+	</delete>
+</mapper>
