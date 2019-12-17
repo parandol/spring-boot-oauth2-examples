@@ -10,9 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -22,16 +27,27 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import kr.ejsoft.oauth2.server.model.OAuthUserDetails;
 
 public class AuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
+	private static final Logger log = LoggerFactory.getLogger(AuthenticationHandler.class);
+
+	@Autowired
+	@Qualifier("oauthUserDetailsService")
+	private UserDetailsService userDetailsService;
+	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		ObjectMapper om = new ObjectMapper();
-
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("success", true);
 		map.put("returnUrl", getReturnUrl(request, response));
 		
 		Object details = authentication.getDetails();
+		if(details instanceof String) {
+			UserDetails user = userDetailsService.loadUserByUsername((String) details);
+			if(user != null) {
+				details = user;
+			}
+		}
 		if(details instanceof OAuthUserDetails) {
 			OAuthUserDetails userDetails = (OAuthUserDetails) details;
 			map.put("name", userDetails.getName());
@@ -41,6 +57,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 			UserDetails userDetails = (UserDetails) details;
 			map.put("username", userDetails.getUsername());
 		}
+		
+		log.debug("User : {}", map);
 		
 		// {"success" : true, "returnUrl" : "..."}
 		String jsonString = om.writeValueAsString(map);

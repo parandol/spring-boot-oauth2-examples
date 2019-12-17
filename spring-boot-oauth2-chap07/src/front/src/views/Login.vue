@@ -28,7 +28,7 @@
         <template v-for="(user, index) in users">
           <div :key="user.userid" v-if="index < 2 && user.userid && user.userid != ''" class="user-element" @click="showInputForm(user);">
             <img class="user-icon" :src="user.icon" v-if="user.icon && user.icon != ''">
-            <img class="user-icon" src="https://cdn.patchcdn.com/assets/layout/contribute/user-default.png" v-els>
+            <img class="user-icon" src="https://cdn.patchcdn.com/assets/layout/contribute/user-default.png" v-else>
             <span>{{ user.name }}</span>
           </div>
         </template>
@@ -81,10 +81,10 @@
         <router-link to="/about">About</router-link>
       </div>
       -->
-        <div class="login-link">
-          <div class="login-link-left"><router-link to="/forgot">Forgot password?</router-link></div>
-          <div class="login-link-right"><router-link to="/signup">Sign up</router-link></div>
-        </div>
+      <div class="login-link">
+        <div class="login-link-left"><router-link to="/forgot">Forgot password?</router-link></div>
+        <div class="login-link-right"><router-link to="/signup">Sign up</router-link></div>
+      </div>
     </div>
   </div>
 </template>
@@ -248,17 +248,19 @@ export default {
         if(res.data) {
           const data = res.data;
           if(data.success == true) {
+            this.isFailurePage = false;
             if(data.username && data.name) {
               const user = {
                 userid : data.username,
                 name : data.name,
                 icon : data.icon,
               }
-              this.$store.dispatch("addUser", user);
+              this.$store.dispatch("addUser", user).then(() => {
+                window.location.href = data.returnUrl;
+              });
+            } else {
+              window.location.href = data.returnUrl;
             }
-
-            this.isFailurePage = false;
-            window.location.href = data.returnUrl;
           } else {
             this.isFailurePage = true;
           }
