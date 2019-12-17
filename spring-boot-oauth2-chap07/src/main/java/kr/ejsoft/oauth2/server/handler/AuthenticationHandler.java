@@ -43,6 +43,8 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 		
 		Object details = authentication.getDetails();
 		if(details instanceof String) {
+			map.put("name", (String) details);
+			map.put("username", (String) details);
 			UserDetails user = userDetailsService.loadUserByUsername((String) details);
 			if(user != null) {
 				details = user;
