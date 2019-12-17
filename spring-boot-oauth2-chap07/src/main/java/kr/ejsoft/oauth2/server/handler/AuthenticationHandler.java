@@ -41,7 +41,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 		map.put("success", true);
 		map.put("returnUrl", getReturnUrl(request, response));
 		
-		Object details = authentication.getDetails();
+		Object details = authentication.getPrincipal();
 		if(details instanceof String) {
 			map.put("name", (String) details);
 			map.put("username", (String) details);
