@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title>Account</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<img th:src="${user.icon}" style="width:100px;height:100px;border-radius:50px;">
+		<br />
+		ID : <span th:text="${user.username}"></span><br />
+		Name : <span th:text="${user.name}"></span><br />
+		
+
+		<a href="/auth/refresh">Refresh</a>
+		<a href="/auth/logout">Logout</a>
+	</body>
+</html>

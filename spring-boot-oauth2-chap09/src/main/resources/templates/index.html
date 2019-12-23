@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title>Home</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<span th:text="${result}"></span>
+		<br />
+		<div>
+			<a href="/auth/login">Login</a>
+		</div>
+		<div th:if="${user} != null">
+			<p>
+				<a th:href="@{/account}">My Info</a>
+				<a href="/auth/logout">Logout</a>
+			</p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+@startuml OAuth2 Server Flow Diagram
+skinparam backgroundColor #FFFFFF
+'skinparam handwritten true
+
+skinparam DefaultFontName "맑은 고딕"
+skinparam DefaultFontSize 12
+
+skinparam SequenceTitleFontSize 24
+
+
+
+title OAuth2 Server/Client Flow Diagram
+
+'participant Alice
+entity "Resource Owner" as owner
+entity "Client" as client
+control "Authorization Server" as server
+control "Resource Server" as resource
+'actor
+'entity "OAuth2 Server" as qrserver
+'boundary "Client" as client
+'database "OAuth2 Database" as db
+'collections Collections
+
+== Authorization Code Grant Type ==
+    autonumber 101
+    owner->client: 로그인 요청(/login)
+    client->server: 권한부여 코드 요청
+    owner<--server: 로그인 페이지 응답
+    owner->server: Client의 정보요청(Ajax - /auth/client)
+    note right
+        SavedRequest에서 Client ID 추출
+        Client ID기반 응답 데이터 생성
+    end note
+    owner<--server: Client의 정보 응답
+    owner->server: 로그인
+    note right
+        response_type=code
+        client_id, client_secret 를 사용하여
+        권한 부여 코드 생성
+    end note
+    client<--server: 권한 부여 코드 응답
+    client->server: 권한부여 코드를 전달하여 Access Token 요청
+    note right
+        response_type=authorization_code
+        client_id, client_secret 를 사용하여
+        Access Token 생성
+    end note
+    client<--server: Access Token 응답(옵션 : Refresh Token)
+    client->resource: Access Token을 사용하여 user 정보 요청(/auth/userinfo)
+    note left
+        Access Token에서 username 추출
+    end note
+    client<--resource: User 정보 데이터 응답
+    note right
+        username을 통하여 User정보 추출
+        User 정보 응답데이터 생성
+    end note
+    owner<--client: 계정 페이지 응답/전환(/account)
+    note right
+        User 정보를 통해 Account 페이지 생성
+    end note
+'    loop
+'        client->resource: Access Token을 사용하여 API 호출
+'        client<--resource: 요청한 데이터 응답
+'    end
+
+@enduml

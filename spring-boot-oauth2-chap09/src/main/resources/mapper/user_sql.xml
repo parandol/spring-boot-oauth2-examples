@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<select id="selectUserById" resultType="kr.ejsoft.oauth2.client.model.User">
+		<![CDATA[
+		SELECT
+		    *
+		FROM
+		    user
+		WHERE
+		    username = #{username}
+		]]>
+	</select>
+
+	<insert id="insertUser" keyProperty="username">
+		REPLACE INTO user
+		    (username, name, icon, access_token, refresh_token)
+		VALUES
+		    (#{username}, #{name}, #{icon}, #{accessToken}, #{refreshToken})
+	</insert>
+	
+	<update id="updateUser" keyProperty="username">
+		UPDATE user SET
+		    name = #{name},
+		    icon = #{icon},
+		    access_token = #{accessToken},
+		    refresh_token = #{refreshToken}
+		WHERE
+		    username = #{username}
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM user
+		 WHERE username = #{username}
+	</delete>
+	
+</mapper>
