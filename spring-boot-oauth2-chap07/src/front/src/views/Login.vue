@@ -55,21 +55,24 @@
             <input type="hidden" name="username" :value="username" />
             <br />
             {{ selectUser.name }}
-            <label-input type="password" name="password" icon="unlock-alt" :value.sync="password">
+            <label-input type="password" name="password" icon="unlock-alt"
+              :value.sync="password">
               Password
             </label-input>
           </div>
           <div v-else>
-            <label-input type="text" name="username" icon="user" :value.sync="username">
+            <label-input type="text" name="username" icon="user"
+              :value.sync="username">
               User Id
             </label-input>
-            <label-input type="password" name="password" icon="unlock-alt" :value.sync="password">
+            <label-input type="password" name="password" icon="unlock-alt"
+              :value.sync="password">
               Password
             </label-input>
           </div>
           <div class="login-buttons">
-            <button class="button-action" @click.stop.prevent="hideInputForm();">Back</button>
-            <button class="button-action" @click.stop.prevent="login();">Login</button>
+            <button type="button" class="button-action" @click.stop.prevent="hideInputForm();">Back</button>
+            <button type="submit" class="button-action" @click.stop.prevent="login();">Login</button>
           </div>
         </form>
       </div>
@@ -255,6 +258,7 @@ export default {
                 name : data.name,
                 icon : data.icon,
               }
+              console.log("Store User : " + user);
               this.$store.dispatch("addUser", user).then(() => {
                 window.location.href = data.returnUrl;
               });

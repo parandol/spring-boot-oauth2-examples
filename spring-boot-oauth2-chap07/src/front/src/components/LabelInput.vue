@@ -4,7 +4,11 @@
       <font-awesome-icon :icon="icon" />
     </div>
     <div class="input">
-      <input :type="type" :name="name" :value="value" @input="$emit('update:value', $event.target.value)" />
+      <input :type="type"
+        :name="name"
+        :value="value"
+        @input="$emit('update:value', $event.target.value)"
+      />
     </div>
     <!--
     <slot></slot>
